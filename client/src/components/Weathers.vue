@@ -14,9 +14,9 @@
       </div>
     </div>
     <hr />
-    <keep-alive>
+    <transition name="slide">
       <component v-bind:is="currentTabComponent" v-bind:date="date"></component>
-    </keep-alive>
+    </transition>
   </div>
 </template>
 
@@ -56,7 +56,11 @@ export default {
   },
   watch: {
     $route(to, from) {
-      this.date = to.query.seach;
+      if (to.query.seach) {
+        this.date = to.query.seach;
+      }else{
+        this.date = "";
+      }
     }
   },
   created() {

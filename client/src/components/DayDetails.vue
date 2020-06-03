@@ -40,16 +40,25 @@ export default {
   },
   watch: {
     $route(to, from) {
-      axios
-        .get("http://localhost:4000/weather", {
-          params: {
-            seach: this.date
-          }
-        })
+      if(this.date != ''){
+        axios
+          .get("http://localhost:4000/weather", {
+            params: {
+              seach: this.date
+            }
+          })
+          .then(res => {
+            this.datas = res.data;
+          })
+          .catch(err => console.log(err));
+      }else{
+        axios
+        .get("http://localhost:4000/weather")
         .then(res => {
           this.datas = res.data;
         })
         .catch(err => console.log(err));
+      }
     }
   }
 };

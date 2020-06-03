@@ -19,21 +19,23 @@ export default {
 </script>
 
 <style>
-body{
-  background: url('https://media.loveitopcdn.com/818/tnr-9-hinh-anh-dep-ve-bien.jpg') no-repeat;
+body {
+  background: url("https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+    no-repeat;
+  /* background-image: linear-gradient(to right, red , blue); */
   background-size: cover;
 }
-.card{
-  opacity: .8;
+.card {
+  opacity: 0.8;
 }
-.text-title{
+.text-title {
   color: #caf8ea;
 }
-.card:hover{
+.card:hover {
   opacity: 1;
   background-color: white;
   /* color: #4ed8e2; */
-  transition: .5s;
+  transition: 0.5s;
 }
 .slide-enter {
   opacity: 0;

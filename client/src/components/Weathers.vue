@@ -1,70 +1,73 @@
 <template>
   <div>
-    <h1 v-if="date == ''">Thời tiết ngày mai</h1>
-    <h1 v-else>Thời tiết ngày {{ replaceDate }}</h1>
-    <hr />
-    <div class="card-deck">
-      <CardWeather v-for="(data, i) in datas" v-bind:key="i" v-bind:data="data"></CardWeather>
+    <h1 class="text-title" v-if="date == ''">Thời tiết ngày mai</h1>
+    <div class="row" v-else>
+      <div class="col-lg-10 col-md-10">
+        <h1 class="text-title">Thời tiết ngày {{ replaceDate }}</h1>
+      </div>
+      <div class="col-lg-2 col-md-2">
+        <button
+          class="btn btn-outline-primary ml-12 float-right mt-3"
+          style="color: #caf8ea;"
+          v-on:click="changeComponents"
+        >{{ btnText }}</button>
+      </div>
     </div>
+    <hr />
+    <transition name="slide">
+      <component v-bind:is="currentTabComponent" v-bind:date="date"></component>
+    </transition>
   </div>
 </template>
 
 <script>
-import CardWeather from "./card/CardWeather";
+import DayDetails from "./DayDetails";
+import TableDetails from "./TableDetails";
 import axios from "axios";
 export default {
   data() {
     return {
-      datas: [],
-      date: ""
+      date: "",
+      currentTabComponent: "DayDetails",
+      btnText: "Chi tiết"
     };
   },
   components: {
-    CardWeather
+    DayDetails,
+    TableDetails
+  },
+  methods: {
+    changeComponents() {
+      if (this.currentTabComponent == "DayDetails") {
+        (this.currentTabComponent = "TableDetails"),
+          (this.btnText = "Quay lại");
+      } else {
+        (this.currentTabComponent = "DayDetails"), (this.btnText = "Chi tiết");
+      }
+    }
   },
   computed: {
-    replaceDate(){
-      return this.date.split('-').reverse().join('/');
+    replaceDate() {
+      return this.date
+        .split("-")
+        .reverse()
+        .join("/");
+    }
+  },
+  watch: {
+    $route(to, from) {
+      if (to.query.seach) {
+        this.date = to.query.seach;
+      }else{
+        this.date = "";
+      }
     }
   },
   created() {
     if (this.$route.query.seach) {
       this.date = this.$route.query.seach;
-      axios
-        .get("http://localhost:4000/weather", {
-          params: {
-            seach: this.date
-          }
-        })
-        .then(res => {
-          this.datas = res.data;
-          console.log(this.datas);
-        })
-        .catch(err => console.log(err));
-    } else {
-      axios
-        .get("http://localhost:4000/weather")
-        .then(res => {
-          this.datas = res.data;
-        })
-        .catch(err => console.log(err));
     }
-  },
-  watch: {
-    $route(to, from){
-      this.date = to.query.seach;
-      axios
-        .get("http://localhost:4000/weather", {
-          params: {
-            seach: this.date
-          }
-        })
-        .then(res => {
-          this.datas = res.data;
-        })
-        .catch(err => console.log(err));
-    }
-  },
+  }
 };
 </script>
 

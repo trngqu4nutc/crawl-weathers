@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import datetime
 
 headers = requests.utils.default_headers()
 
@@ -23,7 +24,8 @@ def getDay():
         high = amplitude[0].get_text()
         low = amplitude[1].get_text()
         updated = amplitude[2].get_text()
-        d.append({'day': day, 'img': img, 'desc': desc, 'celsius': celsius, 'high': high, 'low': low, 'updated': updated})
+        d.append(
+            {'day': day, 'img': img, 'desc': desc, 'celsius': celsius, 'high': high, 'low': low, 'updated': updated})
     # print(d)
     return d
 
@@ -47,7 +49,8 @@ def getTomorow():
         high = amplitude[0].get_text()
         low = amplitude[1].get_text()
         updated = homeForecast[i].find(class_='update').get_text()
-        d.append({'day': day, 'img': img, 'desc': desc, 'celsius': celsius, 'high': high, 'low': low, 'updated': updated})
+        d.append(
+            {'day': day, 'img': img, 'desc': desc, 'celsius': celsius, 'high': high, 'low': low, 'updated': updated})
     return d
 
 
@@ -70,3 +73,31 @@ def getDays(url, limit):
 
     return d
 
+
+def getNow():
+    url = 'http://www.thoitiethanoi.com'
+    req = requests.get(url, headers)
+    date = str(datetime.datetime.now().date())
+
+    # lay trang web
+    bs = BeautifulSoup(req.content, 'html.parser')
+    weatherInfos = bs.find(class_='weather-infos')
+
+    day = weatherInfos.find('h3').get_text()
+    img = str(weatherInfos.find('img'))
+    celsius = weatherInfos.find(class_='w-celsius').get_text()
+    desc = weatherInfos.find(class_='w-desc').get_text()
+    amplitude = weatherInfos.find_all(class_='w-text', limit=3)
+    high = amplitude[0].get_text()
+    low = amplitude[1].get_text()
+    updated = amplitude[2].get_text()
+    return [date, meakeTime(day), img, desc, celsius, high, low, updated]
+
+
+def meakeTime(day):
+    time = datetime.datetime.now().time()
+    day = day[:10] + 'lúc ' + str(time.hour) + 'h ' + str(time.minute) + 'm'
+    return day
+
+
+# print(getNow())

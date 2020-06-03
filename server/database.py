@@ -1,5 +1,4 @@
 import mysql.connector as mysql
-import datetime
 from mysql.connector import Error
 
 
@@ -38,6 +37,22 @@ def insertWeathers(data, date):
         conn.close()
 
 
+def insertDayDetails(data):
+    conn = connection()
+    cursor = conn.cursor()
+    sql = 'insert into daydetails(`date`,`day`,`img`,`desc`,`celsius`,`high`,`low`,`updated`) values(%s,%s,%s,%s,%s,%s,%s,%s)'
+    try:
+        cursor.execute(sql, data)
+        conn.commit()
+        return True
+    except Error as e:
+        return False
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+
+
 def checkDateExists(data):
     conn = connection()
     cursor = conn.cursor()
@@ -58,6 +73,22 @@ def findByDate(data):
     for item in cursor.fetchall():
         d.append({'day': item[0], 'img': item[1], 'desc': item[2], 'celsius': item[3], 'high': item[4], 'low': item[5],
                   'updated': item[6]})
+    cursor.close()
+    conn.close()
+    return d
+
+
+def findDetailsByDate(date):
+    conn = connection()
+    cursor = conn.cursor()
+    sql = 'select `day`, `img`, `desc`, `celsius`, `high`, `low`, `updated` from daydetails where date=%s'
+    cursor.execute(sql, [date])
+    d = []
+    for item in cursor.fetchall():
+        d.append(
+            {'day': item[0], 'img': (item[1][:4] + ' width="100" ' + item[1][5:]), 'desc': item[2], 'celsius': item[3],
+             'high': item[4], 'low': item[5],
+             'updated': item[6]})
     cursor.close()
     conn.close()
     return d

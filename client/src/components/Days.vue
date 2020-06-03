@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Dự đoán {{ number }} ngày tiếp theo</h1>
+    <h1 class="text-title">Dự đoán {{ number }} ngày tiếp theo</h1>
     <hr />
     <div class="row row-cols-1 row-cols-md-4 row-cols-lg-4">
       <!-- <transition name="slide"> -->

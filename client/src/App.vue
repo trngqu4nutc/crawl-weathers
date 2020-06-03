@@ -19,6 +19,24 @@ export default {
 </script>
 
 <style>
+body {
+  background: url("https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+    no-repeat;
+  /* background-image: linear-gradient(to right, red , blue); */
+  background-size: cover;
+}
+.card {
+  opacity: 0.8;
+}
+.text-title {
+  color: #caf8ea;
+}
+.card:hover {
+  opacity: 1;
+  background-color: white;
+  /* color: #4ed8e2; */
+  transition: 0.5s;
+}
 .slide-enter {
   opacity: 0;
 }

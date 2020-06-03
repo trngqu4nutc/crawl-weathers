@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
     <a class="navbar-brand" href="#">Trang chủ</a>
     <button
       class="navbar-toggler"
@@ -77,6 +77,7 @@
           placeholder="Search"
           v-model="date"
           aria-label="Search"
+          style="background-color: #e3f2fd;"
         />
       </form>
       <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="show">Tìm kiếm</button>

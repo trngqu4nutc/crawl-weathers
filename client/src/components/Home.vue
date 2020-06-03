@@ -1,0 +1,34 @@
+<template>
+  <div>
+    <h1>Cập nhật trong ngày</h1>
+    <hr />
+    <div class="card-deck">
+      <Card v-for="(data, i) in datas" v-bind:key="i" v-bind:data="data"></Card>
+    </div>
+  </div>
+</template>
+
+<script>
+import Card from "./card/Card";
+import axios from 'axios';
+export default {
+  data() {
+    return {
+      datas: []
+    };
+  },
+  components: {
+    Card
+  },
+  created(){
+      axios.get('http://localhost:4000/day')
+        .then(res => {
+            this.datas = res.data;
+        })
+        .catch(err => console.log(err));
+  }
+};
+</script>
+
+<style>
+</style>

@@ -1,3 +1,29 @@
+// const Header = (reslove) => {
+//     require.ensure(['./components/layouts/Header'], () => {
+//         reslove(require('./components/layouts/Header'));
+//     });
+// }
+// const Home = (reslove) => {
+//     require.ensure(['./components/Home'], () => {
+//         reslove(require('./components/Home'));
+//     });
+// }
+// const Weathers = (reslove) => {
+//     require.ensure(['./components/Weathers'], () => {
+//         reslove(require('./components/Weathers'));
+//     });
+// }
+// const Days = (reslove) => {
+//     require.ensure(['./components/Days'], () => {
+//         reslove(require('./components/Days'));
+//     });
+// }
+// const Error = (reslove) => {
+//     require.ensure(['./components/Error'], () => {
+//         reslove(require('./components/Error'));
+//     });
+// }
+
 import Header from './components/layouts/Header';
 import Home from './components/Home';
 import Weathers from './components/Weathers';

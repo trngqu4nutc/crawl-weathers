@@ -22,7 +22,7 @@ def insertWeathers(data, date):
     for item in data:
         item['day'] = (item['day'][:-10] + ' (' + item['day'][-10:] + ')').replace('/', '-')
         d.append(
-            (date, item['day'].replace('/', '-'), item['img'], item['desc'], item['celsius'], item['high'], item['low'],
+            (date, item['day'], item['img'], item['desc'], item['celsius'], item['high'], item['low'],
              item['updated']))
     print(d)
     conn = connection()

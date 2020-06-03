@@ -19,6 +19,22 @@ export default {
 </script>
 
 <style>
+body{
+  background: url('https://media.loveitopcdn.com/818/tnr-9-hinh-anh-dep-ve-bien.jpg') no-repeat;
+  background-size: cover;
+}
+.card{
+  opacity: .8;
+}
+.text-title{
+  color: #caf8ea;
+}
+.card:hover{
+  opacity: 1;
+  background-color: white;
+  /* color: #4ed8e2; */
+  transition: .5s;
+}
 .slide-enter {
   opacity: 0;
 }

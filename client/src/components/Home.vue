@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Cập nhật trong ngày</h1>
+    <h1 class="text-title">Cập nhật trong ngày</h1>
     <hr />
     <div class="card-deck">
       <Card v-for="(data, i) in datas" v-bind:key="i" v-bind:data="data"></Card>
@@ -26,6 +26,15 @@ export default {
             this.datas = res.data;
         })
         .catch(err => console.log(err));
+      // setInterval(() => {
+      //   this.datas = [];
+      //   axios.get('http://localhost:4000/day')
+      //   .then(res => {
+      //       this.datas = res.data;
+      //       console.log(res.data);
+      //   })
+      //   .catch(err => console.log(err));
+      // }, 5000);
   }
 };
 </script>
